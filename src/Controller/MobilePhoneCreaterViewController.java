@@ -1,5 +1,6 @@
 package Controller;
 import Model.DBConnect;
+import Model.MobilePhone;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -10,6 +11,8 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MobilePhoneCreaterViewController implements Initializable {
@@ -46,6 +49,10 @@ public class MobilePhoneCreaterViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        List<String> osOption = Arrays.asList("ios","Blackberry","Android");
+        OSChoiceBox.getItems().addAll(osOption);
+
         //pre load the choicebox with valid manufatureres.
         try {
             makeChoiceBox.getItems().addAll(DBConnect.getPhoneManufacturers());
@@ -62,5 +69,25 @@ public class MobilePhoneCreaterViewController implements Initializable {
                     }
                 }
         );
+    }
+
+    public void createPhoneButtonPushed() throws SQLException {
+        try {
+            MobilePhone newPhone = new MobilePhone(
+                    makeChoiceBox.getValue(),
+                    modelTextField.getText(),
+                    OSChoiceBox.getValue(),
+                    Double.parseDouble(screenSizeTextFeild.getText()),
+                    64,
+                    Double.parseDouble(frontCameraTextField.getText()),
+                    Double.parseDouble(rearCameraTextField.getText()),
+                    Double.parseDouble(priceTextField.getText())
+            );
+            DBConnect.insertPhoneIntoDB(newPhone);
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.err.printf("Normally this would in a lable on the GUI %n%s",e.toString());
+        }
     }
 }

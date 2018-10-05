@@ -21,7 +21,7 @@ public class DBConnect {
             statement = conn.createStatement();
 
             //3.  create the sql query
-            resultSet = statement.executeQuery("SELECT * FROM manufacturers");
+            resultSet = statement.executeQuery("SELECT * FROM manufacturers ORDER BY manufacturer");
 
             //4. loop over the results and add it to the ArrayList
             while (resultSet.next())
@@ -89,4 +89,39 @@ public class DBConnect {
         }
         return os;
     }
+
+    public static void insertPhoneIntoDB(MobilePhone newPhone) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+         try{
+             //connect to db
+             conn  = DriverManager.getConnection("jdbc:mysql://localhost:3306/phones?useSSL=false",user, password);
+
+             String sql = "INSERT INTO phones (make, model, os, screenSize, memory,frontCamRes,rearCamRes) VALUES" +
+                     "('?', '?','?', ?, ?, ?, ?)";
+
+             ps = conn.prepareStatement(sql);
+
+             ps.setString(1, newPhone.getMake());
+             ps.setString(2, newPhone.getModel());
+             ps.setString(3, newPhone.getOs());
+             ps.setDouble(4, newPhone.getScreenSize());
+             ps.setDouble(5, newPhone.getMemory());
+             ps.setDouble(6, newPhone.getFrontCameraRes());
+             ps.setDouble(7, newPhone.getRearCameraRes());
+
+             ps.executeUpdate();
+         }
+         catch (SQLException e)
+         {
+             System.out.println(e);
+         }
+         finally {
+             if (conn != null)
+                 conn.close();
+             if (ps != null)
+                 ps.close();
+         }
+    }
+
 }
