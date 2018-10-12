@@ -34,10 +34,11 @@ public class MobilePhone {
 
     public void setMake(String make) throws SQLException {
         ArrayList<String> validMakes = DBConnect.getPhoneManufacturers();
-        if (validMakes.contains(make));
-            this.make = make;
 
-        throw new IllegalArgumentException("Valid makes are: "+validMakes);
+        if (validMakes.contains(make))
+            this.make = make;
+        else
+            throw new IllegalArgumentException("Valid makes are: "+validMakes);
     }
 
     public String getModel() {
@@ -45,7 +46,10 @@ public class MobilePhone {
     }
 
     public void setModel(String model) {
-        this.model = model;
+        if (!model.isEmpty())
+            this.model = model;
+        else
+            throw new IllegalArgumentException("Model cannot be empty");
     }
 
     public String getOs() {
@@ -53,7 +57,10 @@ public class MobilePhone {
     }
 
     public void setOs(String os) {
-        this.os = os;
+        if (os.equals("iOS") || os.equals("android") || os.equals("Blackberry"))
+            this.os = os;
+        else
+            throw new IllegalArgumentException("OS must be iOS, android or Blackberry");
     }
 
     public double getScreenSize() {
@@ -61,7 +68,10 @@ public class MobilePhone {
     }
 
     public void setScreenSize(double screenSize) {
-        this.screenSize = screenSize;
+        if (screenSize>=0)
+            this.screenSize = screenSize;
+        else
+            throw new IllegalArgumentException("screen size cannot be negative");
     }
 
     public double getMemory() {
@@ -69,7 +79,10 @@ public class MobilePhone {
     }
 
     public void setMemory(double memory) {
-        this.memory = memory;
+        if (memory >= 0 && memory <=512)
+            this.memory = memory;
+        else
+            throw new IllegalArgumentException("memory must be 0-512");
     }
 
     public double getFrontCameraRes() {
@@ -77,7 +90,10 @@ public class MobilePhone {
     }
 
     public void setFrontCameraRes(double frontCameraRes) {
-        this.frontCameraRes = frontCameraRes;
+        if (frontCameraRes>=0 && frontCameraRes<=100)
+            this.frontCameraRes = frontCameraRes;
+        else
+            throw new IllegalArgumentException("front camera res must be 0-100");
     }
 
     public double getRearCameraRes() {
@@ -85,7 +101,10 @@ public class MobilePhone {
     }
 
     public void setRearCameraRes(double rearCameraRes) {
-        this.rearCameraRes = rearCameraRes;
+        if (rearCameraRes>=0 && rearCameraRes<=100)
+            this.rearCameraRes = rearCameraRes;
+        else
+            throw new IllegalArgumentException("rear camera res must be 0-100");
     }
 
     public double getPrice() {
@@ -93,6 +112,18 @@ public class MobilePhone {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+
+        if (price >0 && price <= 5000)
+            this.price = price;
+        else
+            throw new IllegalArgumentException("Price must be 0-5000");
+    }
+
+    public Image getPhoneImage() {
+        return photoImage;
+    }
+
+    public void setPhoneImage(Image photoImage) {
+        this.photoImage = photoImage;
     }
 }

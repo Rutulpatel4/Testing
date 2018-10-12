@@ -9,31 +9,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MobilePhoneCreaterViewController">
-   <children>
-      <VBox alignment="CENTER" layoutX="210.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="Table Showing all Phones in Database">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Make" />
-                <TableColumn prefWidth="75.0" text="Model" />
-                  <TableColumn prefWidth="75.0" text="os" />
-                  <TableColumn prefWidth="75.0" text="Screen Size" />
-                  <TableColumn prefWidth="75.0" text="Memory" />
-                  <TableColumn prefWidth="75.0" text="Front Cam" />
-                  <TableColumn prefWidth="75.0" text="Rear Cam" />
-              </columns>
-            </TableView>
-            <Button mnemonicParsing="false" text="Create New Phone Object" />
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TableOfViewController">
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="164.0" layoutY="28.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label text="Table showing all phones in Database">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+                <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                        <TableColumn fx:id="makeColumn" prefWidth="75.0" text="Make" />
+                        <TableColumn fx:id="modelColumn" prefWidth="75.0" text="Model" />
+                        <TableColumn fx:id="osColumn" prefWidth="75.0" text="OS" />
+                        <TableColumn fx:id="screenSizeColumn" prefWidth="75.0" text="Screen Size" />
+                        <TableColumn fx:id="memoryColumn" prefWidth="75.0" text="Memory" />
+                        <TableColumn fx:id="frontCameraColumn" prefWidth="89.0" text="Front Camera" />
+                        <TableColumn fx:id="rearCameraColumn" prefWidth="77.0" text="Rear Camera" />
+                    </columns>
+                </TableView>
+                <Button mnemonicParsing="false" text="Create new Phone Object">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </children>
 </AnchorPane>
